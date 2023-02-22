@@ -1,0 +1,87 @@
+@import url(./base.css);
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;400&display=swap");
+#app {
+  background-color: #111;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  font-weight: 600; }
+
+header {
+  font-size: 45px;
+  height: 165px;
+  font-weight: 700 !important; }
+
+.green-triangle {
+  background: url("/public/green-ellipse.svg") no-repeat center;
+  height: 172px;
+  width: 100%;
+  margin: auto;
+  border: solid #111;
+  margin-top: 75px;
+  padding-left: 8px; }
+
+.green-text-1 {
+  margin-top: 40px;
+  font-size: 36px; }
+
+.green-text-2 {
+  margin-top: -5px;
+  font-size: 14px; }
+
+.purple-rectangle {
+  height: 113px;
+  width: 217px;
+  background-color: #9035FF;
+  border: solid #9035FF;
+  border-radius: 25px; }
+  .purple-rectangle:not(:first-child) {
+    margin-left: 16px; }
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  margin-top: -10px; }
+
+.purple-text {
+  font-weight: 400;
+  color: #DBDBDB;
+  font-size: 20px;
+  margin-top: 13px; }
+
+.purple-value {
+  font-size: 25px; }
+
+.token-name {
+  font-size: 20px; }
+
+.fw400 {
+  font-weight: 400; }
+
+.value-usd {
+  color: #DBDBDB;
+  font-size: 15px;
+  margin-top: -5px; }
+
+.validator {
+  display: inline-block;
+  border: solid 3px #9035FF;
+  border-radius: 12px 0 0 12px;
+  height: 42px;
+  width: 184px;
+  margin-top: 47px;
+  background-color: #9035FF;
+  padding-top: 5px;
+  font-size: 16px; }
+
+.validator-address {
+  display: inline-block;
+  border: solid 3px #9035FF;
+  width: 503px;
+  height: 42px;
+  border-radius: 0 12px 12px 0;
+  padding-top: 6.5px;
+  font-weight: 400;
+  text-indent: -25px; }
+
+/*# sourceMappingURL=main.css.map */
