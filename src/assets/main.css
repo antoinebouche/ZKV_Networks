@@ -1,6 +1,6 @@
 @import url(./base.css);
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;400&display=swap");
-#app {
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+html {
   background-color: #111;
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -8,13 +8,14 @@
   font-weight: 600; }
 
 header {
+  margin-top: 100px;
   font-size: 45px;
   height: 165px;
-  font-weight: 700 !important; }
+  font-weight: 700; }
 
 .green-triangle {
-  background: url("/public/green-ellipse.svg") no-repeat center;
-  height: 172px;
+  background: url("src/assets/images/green-ellipse.svg") no-repeat center;
+  height: 150px;
   width: 100%;
   margin: auto;
   border: solid #111;
@@ -22,12 +23,14 @@ header {
   padding-left: 8px; }
 
 .green-text-1 {
-  margin-top: 40px;
-  font-size: 36px; }
+  margin-top: 30px;
+  font-size: 36px;
+  font-weight: 700; }
 
 .green-text-2 {
   margin-top: -5px;
-  font-size: 14px; }
+  font-size: 14px;
+  font-weight: 700; }
 
 .purple-rectangle {
   height: 113px;
@@ -40,8 +43,7 @@ header {
 
 .flex-container {
   display: flex;
-  justify-content: center;
-  margin-top: -10px; }
+  justify-content: center; }
 
 .purple-text {
   font-weight: 400;
@@ -50,7 +52,8 @@ header {
   margin-top: 13px; }
 
 .purple-value {
-  font-size: 25px; }
+  font-size: 25px;
+  font-weight: 700; }
 
 .token-name {
   font-size: 20px; }
@@ -69,7 +72,7 @@ header {
   border-radius: 12px 0 0 12px;
   height: 42px;
   width: 184px;
-  margin-top: 47px;
+  margin-top: 34px;
   background-color: #9035FF;
   padding-top: 5px;
   font-size: 16px; }
@@ -80,8 +83,55 @@ header {
   width: 503px;
   height: 42px;
   border-radius: 0 12px 12px 0;
-  padding-top: 6.5px;
-  font-weight: 400;
-  text-indent: -25px; }
+  text-indent: 20px;
+  font-weight: 400; }
+
+.copy-button {
+  width: 30px;
+  height: 33px;
+  margin: 1px 0 -10.5px 20px; }
+
+.grey-rectangle {
+  width: 217px;
+  height: 75px;
+  border: solid 2px #6B6B6B;
+  border-radius: 10px;
+  margin-top: 34px;
+  padding-top: 12px;
+  padding-left: 15px;
+  background-color: #1B1B1B; }
+  .grey-rectangle:not(:first-child) {
+    margin-left: 16px; }
+
+.grey-img {
+  display: flex; }
+
+.grey-text {
+  margin-top: -48px;
+  margin-left: 36px; }
+
+.grey-value {
+  margin-left: 36px;
+  font-size: 20px; }
+
+.fee {
+  padding-top: 4px; }
+
+.vote {
+  padding-top: 2px; }
+
+.people {
+  margin-top: -2px; }
+
+.delegate-button {
+  width: 313px;
+  height: 91px;
+  background-color: rgba(101, 255, 135, 0.71);
+  font-size: 32px;
+  border-radius: 8px;
+  text-align: center;
+  margin: auto;
+  margin-top: 70px;
+  padding-top: 19px; }
 
 /*# sourceMappingURL=main.css.map */
