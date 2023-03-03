@@ -5,7 +5,8 @@ html {
   text-align: center;
   font-family: 'Poppins', sans-serif;
   color: white;
-  font-weight: 600; }
+  font-weight: 600;
+  scroll-behavior: smooth; }
 
 header {
   margin-top: 100px;
@@ -20,17 +21,26 @@ header {
   margin: auto;
   border: solid #111;
   margin-top: 75px;
-  padding-left: 8px; }
+  padding-left: 8px;
+  text-indent: -6px; }
 
 .green-text-1 {
-  margin-top: 30px;
-  font-size: 36px;
-  font-weight: 700; }
+  margin-top: 36px;
+  font-size: 30px;
+  font-weight: 600; }
 
 .green-text-2 {
   margin-top: -5px;
   font-size: 14px;
-  font-weight: 700; }
+  font-weight: 600; }
+
+.green-text-3 {
+  margin-top: 38px;
+  font-size: 17px;
+  font-weight: 600; }
+
+.green-text-4 {
+  font-size: 27px; }
 
 .purple-rectangle {
   height: 113px;
@@ -66,30 +76,42 @@ header {
   font-size: 15px;
   margin-top: -5px; }
 
-.validator {
-  display: inline-block;
-  border: solid 3px #9035FF;
-  border-radius: 12px 0 0 12px;
-  height: 42px;
-  width: 184px;
+.address-div {
   margin-top: 34px;
+  height: 42px;
+  width: 687px;
+  border: solid 3px #9035FF;
+  border-radius: 12px;
+  margin: auto;
+  margin-top: 34px; }
+
+.validator {
+  display: inline;
   background-color: #9035FF;
-  padding-top: 5px;
-  font-size: 16px; }
+  font-size: 16px;
+  border: solid 8px #9035FF;
+  border-radius: 12px 0 0 12px;
+  margin-left: -7px; }
 
 .validator-address {
-  display: inline-block;
-  border: solid 3px #9035FF;
   width: 503px;
   height: 42px;
-  border-radius: 0 12px 12px 0;
-  text-indent: 20px;
+  margin-left: 25px;
   font-weight: 400; }
 
 .copy-button {
   width: 30px;
   height: 33px;
-  margin: 1px 0 -10.5px 20px; }
+  margin: 1px 0 -10.5px 15px; }
+  .copy-button:hover {
+    border: 2px solid #111; }
+
+.copied {
+  margin-left: 618px;
+  margin-top: 12px;
+  border: solid 1px #9035FF;
+  border-radius: 7px;
+  width: 65px; }
 
 .grey-rectangle {
   width: 217px;
@@ -132,6 +154,19 @@ header {
   text-align: center;
   margin: auto;
   margin-top: 70px;
-  padding-top: 19px; }
+  padding-top: 19px;
+  font-weight: 500;
+  transition: #111 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  color: white;
+  text-decoration: none; }
+  .delegate-button.delegate-button:hover {
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.4); }
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: white; }
 
 /*# sourceMappingURL=main.css.map */
