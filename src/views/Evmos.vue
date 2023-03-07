@@ -60,6 +60,7 @@
           </div>
         </a>
         <TheNetworkInfo/>
+        <TheGovernanceVotes/>
         <!-- <div>
           <h1>Validator Information</h1>
           <ul>
@@ -84,6 +85,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 import TheNetworkInfo from '/Users/antoine/Documents/ZKValidator/NetworkDashboard/src/components/TheNetworkInfo.vue'
+import TheGovernanceVotes from '/Users/antoine/Documents/ZKValidator/NetworkDashboard/src/components/TheGovernanceVotes.vue'
 
 
 
@@ -120,8 +122,10 @@ interface Delegators {
 
 
 export default {
+
+  name: 'Evmos',
     // Properties returned from data() become reactive state
-    // and will be exposed on `this`.
+    // and will be exposed on `this`
     data() {
         return {
             res: [],
@@ -135,7 +139,8 @@ export default {
     },
 
     components: {
-      TheNetworkInfo
+      TheNetworkInfo,
+      TheGovernanceVotes
     },
     // Methods are functions that mutate state and trigger updates.
     // They can be bound as event listeners in templates.

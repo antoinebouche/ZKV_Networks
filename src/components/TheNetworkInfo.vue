@@ -15,7 +15,6 @@
             </tr>
         </tbody>
     </table>
-
 </template>
 
 <script lang="ts">
@@ -34,6 +33,7 @@
   
 export default {
 
+    name: 'TheNetworkInfo',
     data() {
         return{
             nodeInfo: {} as node_info,
@@ -91,10 +91,5 @@ export default {
     tr {
         font-weight: 400;
     }
-
-
-
-
-
 
 </style>
