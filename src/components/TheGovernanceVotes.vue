@@ -7,16 +7,19 @@
             <span class="vote">Vote</span>
         </div>
         <div>
-            
-            <div class="votes" v-for="(proposal, index) in visibleItems" :key="index">
-                <div class="id-vote">#{{ proposal.proposal_id }}</div> 
-                <div class="title-vote">{{ proposal.content.title }}</div>
-            </div>
-                    
+            <div class="votes-container">
+                <div class="votes" v-for="(proposal, index) in visibleItems" :key="index">
+                    <a :href="`https://www.mintscan.io/evmos/proposals/${proposal.proposal_id}`" target="_blank">
+                        <div class="id-vote">#{{ proposal.proposal_id }}</div> 
+                        <div class="title-vote">{{ proposal.content.title }}</div>
+                    </a>
+                </div>
+            </div>      
             <div class="pages">
-                <img src="src/assets/images/angel_left.svg" class="previous" @click="previousPage" v-if="currentPage != 1"/>
+                <img src="src/assets/images/angel_left.svg" class="previous" @click="previousPage" v-show="currentPage>1"/>
+                <div class="placeholder" v-show="currentPage == 1"></div>
                 <span class="nb-pages">{{ currentPage }}/{{ totalPages }}</span>
-                <img src="src/assets/images/angel_right.svg" class="next" @click="nextPage" v-if="currentPage != totalPages"/>
+                <img src="src/assets/images/angel_right.svg" class="next" @click="nextPage" v-show="currentPage < totalPages"/>
             </div>
         </div>
     </div>
@@ -26,27 +29,18 @@
 
 <script lang="ts">
 
-import axios from 'axios';
-import type { AxiosResponse } from 'axios';
-
-interface VotesArray {
-    proposals: {
-        id: number,
-        title: string,
-        description: string
-    }
-}
-
-export default ({
+export default {
   data() {
     return {
-      items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'] as string[], // replace with your actual data
       itemsPerPage: 5 as number,
       currentPage: 1 as number,
       APIurl: 'https://evmos-api.polkachu.com/cosmos/gov/v1beta1/proposals' as string,
-      allProposals: [] as string[],
       url: '' as string || null,
     };
+  },
+
+  props: {
+    allProposals: Array<string>
   },
 
   computed: {
@@ -75,40 +69,9 @@ export default ({
     previousPage(): void {
         this.currentPage--;
     },
-
-    async fetchVoteData() {
-      try {
-
-        this.url = this.APIurl;
-        //let allProposals= [];
-        this.allProposals;
-
-        while (this.url) {
-
-            
-            
-            const response: AxiosResponse = await axios.get(this.url);
-            const { proposals, pagination } = response.data;
-            this.allProposals.push(...proposals);
-
-            this.url = pagination.next_key ? `${this.url}?pagination.key=${pagination.next_key}` : null;
-            
-        
-        }
-        
-      } catch (error) {
-            console.log('error');
-      }
-
-      this.allProposals.reverse();
-
-    },
   },
 
-  mounted() {
-    this.fetchVoteData();
-  },
-});
+};
 </script>
 
 <style lang="scss">
@@ -122,6 +85,7 @@ export default ({
         margin-top: 20px;
         text-align: left;
         padding-left: 8px;
+        margin-bottom: 36px;
     }
 
     .topline{
@@ -143,6 +107,10 @@ export default ({
         
     }
 
+    .votes-container{
+        height: 140px;
+    }
+
     .votes{
         font-weight: 400;
         height: 24px;
@@ -157,9 +125,11 @@ export default ({
 
     .title-vote{
         display: inline-block;
-        width: 500px;
+        width: 490px;
         overflow: hidden;
         white-space: nowrap;
+        font-size: 14px;
+        color: #79A1FF;
 
         &:hover {
             overflow:auto;
@@ -175,22 +145,24 @@ export default ({
         background-color: rgb(87, 86, 86); /* Adjust as needed */
     }
 
-    .previous, .next{
-        width: 14px;
+    .previous, .next, .placeholder{
+       width: 14px;
+       height: 14px;
+       display: inline-block;
     }
 
     .pages{
-        //text-align: end;
-        //margin-right: 10px;
         margin-left: 550px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
     }
 
     .nb-pages{
-        margin-left: 0px;
+        width: 50px;
+        display: inline-block;
+        text-align: center;
     }
 
-    .hidden {
-        visibility: hidden;
-    }
 
 </style>

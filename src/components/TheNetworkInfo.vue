@@ -10,54 +10,24 @@
         <tbody>
             <tr class="second-row">
                 <td>Mainnet</td>
-                <td>{{ nodeInfo.network }}</td>
-                <td>{{networkVersion.version}}</td>
+                <td>{{ nodeInfo }}</td> 
+                <td>{{networkVersion}}</td>
             </tr>
         </tbody>
     </table>
 </template>
 
 <script lang="ts">
-
-    import axios from "axios";
-    import type { AxiosResponse } from 'axios';
-
-
-    interface node_info {
-        network: string;
-    };
-
-    interface network_version {
-        version: string;
-    };
   
 export default {
 
     name: 'TheNetworkInfo',
-    data() {
-        return{
-            nodeInfo: {} as node_info,
-            networkVersion: {} as network_version
-        };
+
+    props: {
+        nodeInfo: {type: String },
+        networkVersion: {type : String},
+
     },
-
-    methods:{
-        async fetchNetworkInfo(): Promise<void> {
-            try{
-                const response: AxiosResponse<any> = await axios.get('https://evmos-api.polkachu.com/cosmos/base/tendermint/v1beta1/node_info');
-                this.nodeInfo.network = response.data.default_node_info.network;
-                this.networkVersion.version = response.data.application_version.version;
-            }
-            catch (error) {
-                console.error(error);
-            }
-        }
-    },
-
-    mounted() {
-        this.fetchNetworkInfo();
-  }
-
 }
 </script>
 
@@ -76,6 +46,7 @@ export default {
         border-radius: 8px;
         margin-top: 55px;
         table-layout: fixed;
+        margin-bottom: 36px;
     }
 
     th{

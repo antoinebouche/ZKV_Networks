@@ -59,19 +59,30 @@
             Delegate To Us
           </div>
         </a>
-        <TheNetworkInfo/>
-        <TheGovernanceVotes/>
-        <!-- <div>
-          <h1>Validator Information</h1>
-          <ul>
-          <li>Stake: {{ validatorInfo.tokens }}</li>
-          <li v-if="validatorInfo.tokens">Expected Blocks: {{validatorInfo.totalBondedTokens}}</li>
-          <li>Expected Chunks: {{ validatorInfo.totalDelegators }}</li>
-          <li>Produced Blocks: {{ validatorInfo?.num_produced_blocks }}</li>
-          <li>Produced Chunks: {{ validatorInfo?.num_produced_chunks }}</li>
-          <li>Validator Stake Struct Version: {{ validatorInfo?.validator_stake_struct_version }}</li>
-          </ul>
-       </div> -->
+        <TheNetworkInfo :networkVersion="networkVersion.version" :nodeInfo="nodeInfo.network" />
+        <TheGovernanceVotes :allProposals="allProposals"/>
+        <div class="info-section">
+          <div class="useful-links">Useful links</div>
+          <div>
+            <a href="https://www.mintscan.io/evmos" target="_blank">
+              <div class="link">
+                Block explorer
+              </div>
+            </a>
+            <a href="https://www.mintscan.io/evmos/validators/evmosvaloper1hdslyd0vwj8ym368tqc5jdpu6hxrqvx9zex5yz" target="_blank">
+              <div class="link">
+                More info about our validator node
+              </div>
+            </a>
+            <a href="https://evmos-rpc.polkachu.com/" target="_blank">
+              <div class="link">
+                RPC endpoint
+              </div>
+            </a>
+            <TheUptimeTable :uptime="99" :latency="5"/>
+            
+          </div>
+        </div>
       </body>
     </html>
    
@@ -86,7 +97,7 @@ import axios from 'axios';
 import type { AxiosResponse } from 'axios';
 import TheNetworkInfo from '/Users/antoine/Documents/ZKValidator/NetworkDashboard/src/components/TheNetworkInfo.vue'
 import TheGovernanceVotes from '/Users/antoine/Documents/ZKValidator/NetworkDashboard/src/components/TheGovernanceVotes.vue'
-
+import TheUptimeTable from '/Users/antoine/Documents/ZKValidator/NetworkDashboard/src/components/TheUptimeTable.vue'
 
 
 interface ZKValidatorEvmosData {
@@ -120,6 +131,13 @@ interface Delegators {
   total: number;
 }
 
+interface node_info {
+  network: string;
+};
+
+interface network_version {
+    version: string;
+};
 
 export default {
 
@@ -135,15 +153,20 @@ export default {
             showCopiedMessage: false as boolean,
             poolTokens: {} as Pool,
             allDelegators: {} as ZKValidatorEvmosData,
+            nodeInfo: {} as node_info,
+            networkVersion: {} as network_version,
+            APIurl: 'https://evmos-api.polkachu.com/cosmos/gov/v1beta1/proposals' as string,
+            allProposals: [] as string[],
+            url: '' as string || null,
         };
     },
 
     components: {
-      TheNetworkInfo,
-      TheGovernanceVotes
+    TheNetworkInfo,
+    TheGovernanceVotes,
+    TheUptimeTable,
     },
-    // Methods are functions that mutate state and trigger updates.
-    // They can be bound as event listeners in templates.
+
     methods: {
         copyText() {
             navigator.clipboard.writeText(this.EvmosAddress);
@@ -172,21 +195,72 @@ export default {
                 this.validatorInfo.totalDelegators = response4.data.pagination.total;
             } 
             catch (error) {
-                console.error(error);
+                console.error('error');
             }
         },
 
+        async fetchNetworkInfo(): Promise<void> {
+            try{
+                const response: AxiosResponse<any> = await axios.get('https://evmos-api.polkachu.com/cosmos/base/tendermint/v1beta1/node_info');
+                this.nodeInfo.network = response.data.default_node_info.network;
+                this.networkVersion.version = response.data.application_version.version;
+            }
+            catch (error) {
+                console.error('error');
+            }
+        },
+
+        async fetchVoteData(): Promise<void> {
+
+          try {
+
+            this.url = 'https://evmos-api.polkachu.com/cosmos/gov/v1beta1/proposals';
+            this.allProposals;
+
+            while (this.url) {
+                const response: AxiosResponse = await axios.get(this.url);
+                const { proposals, pagination } = response.data;
+                this.allProposals.push(...proposals);
+
+                this.url = pagination.next_key ? `${this.url}?pagination.key=${pagination.next_key}` : null;
+            }
+            
+          } catch (error) {
+                console.log('error');
+          }
+
+          this.allProposals.reverse();
+        },
     },
     
     mounted() {
         this.fetchEvmosData();
-    },
-    async created() {
+        this.fetchNetworkInfo();
+        this.fetchVoteData();
     },
 }
 
 </script>
 
 <style>
+
+.info-section{
+  margin: auto;
+  width: 649px;
+  border: solid 1px #464646;
+  text-align: left;
+  padding-left: 8px;
+  
+}
+
+.useful-links{
+  height: 33px;
+  font-size: 16px;
+}
+
+.link{
+  font-size: 14px;
+  color: #79A1FF;
+}
 
 </style>
